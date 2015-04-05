@@ -1,0 +1,46 @@
+= form_tag form_url, 'data-method' => :post
+  .panel class=panel_type
+    .panel-heading
+      h3.panel-title.i18no7rhead
+        => title
+      ul.horizontal.nomargin
+        li= link_to details_url.(''), class: 'btn btn-default'
+          i.glyphicon.glyphicon-home
+        - @keys.length.times do |i|
+          li
+            - c = (@keys.length == i+1 ? 'btn-primary' : 'btn-default')
+            tt= link_to @keys[i], details_url.(@keys[0..i].join('/')), class: "btn #{c}"
+    - if @subtrees.present?
+      .panel-body
+        ul.horizontal
+          - @subtrees.each do |s, tree|
+            li.margin: tt= link_to details_url.((@keys + [s]).join('/')), class: 'btn btn-default'
+              = "#{s} (#{tree._deep_count})"
+
+    - if @entries.present?
+      table.table.table-striped.o7rtable
+        tr
+          th Key
+          - I18nO7r.languages.each do |l|
+            th= l
+        - @entries.each do |e,v|
+          tr
+            td: tt
+              span.prefix
+                = (@keys + ['']).join('.')
+              span.key
+                = e
+                - if v.is_a?(Hash)
+                  | .html
+            - I18nO7r.languages.each do |l|
+              td
+                - val = @store.lookup(l, (@keys + [e]).join('.'))
+                - if val.is_a?(Hash)
+                  = text_area_tag "translations[#{l}][#{e}][html]", val[:html], class: 'form-control autosize html'
+                - else
+                  = text_area_tag "translations[#{l}][#{e}]", val, class: 'form-control autosize ' + (e.to_s.end_with?('html') ? 'html' : '')
+      .panel-footer
+        = submit_tag 'Speichern', class: 'btn btn-primary'
+    - else
+      .panel-footer
+         | No Entries

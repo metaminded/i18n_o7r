@@ -1,0 +1,16 @@
+- store.each do |k, v|
+  - newkeys = [keys, k].flatten
+  - case v
+  - when Hash
+    - c = v._deep_count {|v| v.try(:start_with?, I18nO7r.missing_indicator) ? 1 : 0 }
+    - if c > 0
+      li
+        - kk = newkeys.join('/')
+        => link_to i18n_o7r.translations_path(kk), class: 'btn btn-default btn-sm'
+          tt
+            - kk = newkeys.join('.')
+            = "#{kk} (#{c})"
+        ul
+          = render 'tree', store: v, keys: newkeys
+  - else
+    / nothing!

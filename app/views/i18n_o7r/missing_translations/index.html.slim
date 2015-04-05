@@ -1,0 +1,17 @@
+.panel.panel-warning
+  .panel-heading
+    h3.panel-title Missing translations for #{@lang}
+  .panel-body
+    .easy-tree
+      ul
+        = render 'tree', store: @store.translations[@lang.to_sym], keys: []
+
+/ javascript:
+/   jQuery(function ($) {
+/     $('.easy-tree').EasyTree({
+/       selectable: false,
+/       deletable: false,
+/       editable: false,
+/       addable: false
+/     })
+/   })

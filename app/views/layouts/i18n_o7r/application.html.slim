@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    meta name="viewport" content="width=device-width, initial-scale=1"
+    title I18nO7r – Internationalization Organizer
+    = stylesheet_link_tag I18nO7r.bootstrap_css_url, media: "all"
+    = stylesheet_link_tag 'i18n_o7r/application', media: "all"
+    = javascript_include_tag I18nO7r.jquery_js_url
+    = javascript_include_tag I18nO7r.bootstrap_js_url
+    = javascript_include_tag 'i18n_o7r/application'
+    = csrf_meta_tags
+body
+  nav class="navbar navbar-inverse navbar-fixed-top"
+    div class="container"
+      div class="navbar-header"
+        button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"
+          span class="sr-only" Toggle navigation
+          span class="icon-bar"
+          span class="icon-bar"
+          span class="icon-bar"
+        a class="navbar-brand" href="#" Project name
+      div id="navbar" class="collapse navbar-collapse"
+        ul class="nav navbar-nav"
+          li.active: a href=i18n_o7r.translations_path Translations
+          li: a href=i18n_o7r.missing_translations_path(I18nO7r.primary_language) Missing Translations
+          li: a href="#contact" Contact
+
+  .container style='margin-top: 70px;'
+    = yield

@@ -1,0 +1,55 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require ./easyTree
+ *= require_self
+ */
+
+h3.i18no7rhead {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+ul.horizontal {
+  display: inline-block;
+  padding: 0;
+  &.nomargin {
+    margin-bottom: 0;
+  }
+  & > li {
+    display: inline-block;
+    margin-right: 5px;
+    &.margin {
+      margin-bottom: 5px;
+    }
+  }
+}
+
+span.prefix { display: none; }
+span.key { cursor: pointer; }
+
+table.o7rtable {
+  td:first-child {
+    width: 20%;
+  }
+}
+
+textarea {
+  &.autosize {
+    -webkit-transition: height 0.2s;
+    -moz-transition: height 0.2s;
+    transition: height 0.2s;
+  }
+  &.html {
+    font-family: monospace;
+  }
+}
