@@ -3,7 +3,14 @@ module I18nO7r
     module Dumper
 
       def dump(target, cleanup: false)
-        FileUtils.rm_r Dir[File.join(target, '*')] if cleanup
+        if cleanup
+          savepath = File.join(Rails.root, 'tmp', 'i18n_o7r', "#{Time.now.to_i}-saved-locales")
+          FileUtils.mkdir_p(savepath)
+          files = Dir[File.join(target, '*')]
+          files.each do |file|
+            FileUtils.move file, savepath
+          end
+        end
         dumper(translations, [], target)
       end
 

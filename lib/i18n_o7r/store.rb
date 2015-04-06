@@ -10,14 +10,13 @@ class I18nO7r::Store
   def initialize(locales_paths: nil, use_locales: nil)
     @backend = I18n::Backend::Simple.new
     @locales_paths = locales_paths || Dir[File.join(I18nO7r.locales_root, '**/*.yml')]
-    @backend.load_translations
-    @use_locales = I18nO7r.languages
+    @backend.load_translations @locales_paths
+    @use_locales = (use_locales || I18nO7r.languages || I18n.available_locales).map(&:to_sym)
     @translations = @backend.send(:translations).dup
     @translations.keys.each do |lang|
       next if @use_locales.member? lang
       @translations.delete(lang)
     end
-    @use_locales = (use_locales || I18n.available_locales).map(&:to_sym)
   end
 
   def lookup(locale, key)

@@ -19,6 +19,7 @@ module I18nO7r
   mattr_accessor :jquery_js_url
   mattr_accessor :save_missing_translations_in_envs
   mattr_accessor :missing_translations_filename
+  mattr_accessor :ignore_missing_pattern
 
   @@languages                 = I18n.available_locales
   @@primary_language          = I18n.locale
@@ -27,17 +28,22 @@ module I18nO7r
   @@jquery_js_url             = JQUERY_JS_CDN_URL
   @@missing_indicator         = DEFAULT_MISSING_INDICATOR
   @@save_missing_translations_in_envs = %w{development}
-  @@missing_translations_filename = "_missing.yml"
+  @@missing_translations_filename = nil
 
   def self.configure
     yield(self)
-    if !dump_location || !password || !username || !locales_root || !primary_language || !languages
-      raise "For I18nO7r to work properly, you need to configure dump_location, password, username, locales_root, primary_language and languages"
+    if !dump_location || !locales_root || !primary_language || !languages
+      raise "For I18nO7r to work properly, you need to configure dump_location, locales_root, primary_language and languages"
     end
     @@configured = true
+  end
+
+  def self.ignore_missing_if(&block)
+    @@ignore_missing_pattern = block
   end
 end
 
 require_relative "./i18n_o7r/engine.rb"
 require_relative "./i18n_o7r/store.rb"
 require_relative "./i18n_o7r/hash_deep_count.rb"
+require_relative "./i18n/find_missing_translations.rb"
