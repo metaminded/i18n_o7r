@@ -2,7 +2,7 @@
   - newkeys = [keys, k].flatten
   - case v
   - when Hash
-    - c = v._deep_count {|v| v.try(:start_with?, I18nO7r.missing_indicator) ? 1 : 0 }
+    - c = v._deep_count {|v| v == nil ? 1 : 0 }
     - if c > 0
       li
         - kk = newkeys.join('/')

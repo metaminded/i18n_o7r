@@ -22,9 +22,9 @@ module I18nO7r
             other_store[key] = {} unless other_store[key].is_a?(Hash)
             unifyer(val, other_store[key])
           when Array
-            other_store[key] ||= val.map {|v| "#{I18nO7r.missing_indicator} #{v}"}
+            other_store[key] ||= val.map {|v| nil }
           else
-            other_store[key] ||= "#{I18nO7r.missing_indicator} #{val}"
+            other_store[key] ||= nil
           end
         end
       end

@@ -3,7 +3,6 @@ require 'yaml/store'
 BOOTSTRAP_CSS_CDN_URL = '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'
 BOOTSTRAP_JS_CDN_URL  = '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'
 JQUERY_JS_CDN_URL     = 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js'
-DEFAULT_MISSING_INDICATOR = '[*] '
 
 module I18nO7r
   mattr_accessor :dump_location
@@ -13,7 +12,6 @@ module I18nO7r
   mattr_accessor :primary_language
   mattr_accessor :languages
   mattr_accessor :configured
-  mattr_accessor :missing_indicator
   mattr_accessor :bootstrap_css_url
   mattr_accessor :bootstrap_js_url
   mattr_accessor :jquery_js_url
@@ -26,7 +24,6 @@ module I18nO7r
   @@bootstrap_js_url          = BOOTSTRAP_JS_CDN_URL
   @@bootstrap_css_url         = BOOTSTRAP_CSS_CDN_URL
   @@jquery_js_url             = JQUERY_JS_CDN_URL
-  @@missing_indicator         = DEFAULT_MISSING_INDICATOR
   @@save_missing_translations_in_envs = %w{development}
   @@missing_translations_filename = nil
 

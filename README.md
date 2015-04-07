@@ -49,9 +49,6 @@ add an initializer (no generator so far):
     end
     # only save missing translations in this envs
     config.save_missing_translations_in_envs = %{development}
-    # Prefix all detected missing translations with this string.
-    # These value will be considered 'missing'
-    config.missing_indicator = '[*]'
 
     # By default, we use the cdn versions of bootstrap and jquery to not have
     # explicit gem dependencies and keep this gem lean. If you prefer to use
