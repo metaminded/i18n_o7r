@@ -1,5 +1,5 @@
 module I18nO7r
-  class TranslationsController < ApplicationController
+  class TranslationsController < I18nO7r::ApplicationController
 
     before_filter do
       @keys = params[:path].try(:split, '/') || []

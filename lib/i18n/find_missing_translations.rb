@@ -3,7 +3,10 @@ module I18nO7r::FindMissingTranslations
   def lookup(locale, key, scope = [], options = {})
     show_missing = options.delete(:show_missing)
     t = super(locale, key, scope, options)
-    if t && (!t.start_with?(I18nO7r.missing_indicator) || show_missing)
+    if t && !t.is_a?(String)
+      # we found a proper match
+      return t
+    elsif t && (!t.start_with?(I18nO7r.missing_indicator) || show_missing)
       # we found a proper match
       return t
     elsif t && t.start_with?(I18nO7r.missing_indicator)

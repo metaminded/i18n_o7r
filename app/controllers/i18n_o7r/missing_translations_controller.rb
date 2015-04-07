@@ -1,5 +1,5 @@
 module I18nO7r
-  class MissingTranslationsController < ApplicationController
+  class MissingTranslationsController < I18nO7r::ApplicationController
 
     def index
       @lang = params[:lang]
