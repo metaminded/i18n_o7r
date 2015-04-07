@@ -34,7 +34,7 @@
                   | .html
             - I18nO7r.languages.each do |l|
               td
-                - val = @store.lookup(l, (@keys + [e]).join('.'))
+                - val = @store.lookup(l, (@keys + [e]).join('.'), show_missing: true)
                 - if val.is_a?(Hash)
                   = text_area_tag "translations[#{l}][#{e}][html]", val[:html], class: 'form-control autosize html'
                 - else

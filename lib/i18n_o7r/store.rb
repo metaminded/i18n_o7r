@@ -19,8 +19,8 @@ class I18nO7r::Store
     end
   end
 
-  def lookup(locale, key)
-    @backend.send(:lookup, locale, key)
+  def lookup(locale, key, show_missing: false)
+    @backend.send(:lookup, locale, key, [], show_missing: true)
   end
 
   def for(keys, locale: nil)

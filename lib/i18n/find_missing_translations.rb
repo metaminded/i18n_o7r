@@ -1,9 +1,19 @@
 module I18nO7r::FindMissingTranslations
 
   def lookup(locale, key, scope = [], options = {})
-    t = super
-    return t if t
-    return nil unless I18nO7r.missing_translations_filename && I18nO7r.save_missing_translations_in_envs.member?(Rails.env.to_s)
+    show_missing = options.delete(:show_missing)
+    t = super(locale, key, scope, options)
+    if t && (!t.start_with?(I18nO7r.missing_indicator) || show_missing)
+      # we found a proper match
+      return t
+    elsif t && t.start_with?(I18nO7r.missing_indicator)
+      # we found a generated match, this is considered "not found"
+      return nil
+    elsif !I18nO7r.missing_translations_filename || !I18nO7r.save_missing_translations_in_envs.member?(Rails.env.to_s)
+      # we're not set up to do any special magic
+      return nil
+    end
+    # The key wasn't found and we're prepared to write it away
     ipat = I18nO7r.ignore_missing_pattern
     kk = [locale, scope, key].join('.')
     case ipat
