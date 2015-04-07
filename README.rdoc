@@ -1,3 +1,0 @@
-= I18nO7r
-
-This project rocks and uses MIT-LICENSE.
