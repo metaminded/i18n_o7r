@@ -31,5 +31,5 @@ if I18nO7r.save_missing_translations_in_envs.member?(Rails.env.to_s)
     end # lookup
   end # FindMissingTranslations
 
-  I18n::Backend::Simple.prepend I18nO7r::FindMissingTranslations
+  I18n::Backend::Simple.send :prepend, I18nO7r::FindMissingTranslations
 end
