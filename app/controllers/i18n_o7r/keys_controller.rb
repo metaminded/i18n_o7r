@@ -1,5 +1,6 @@
 module I18nO7r
   class KeysController < I18nO7r::ApplicationController
+
     def edit
       @path = params[:path]
       render action: 'edit', layout: false
