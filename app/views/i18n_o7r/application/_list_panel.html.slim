@@ -32,6 +32,7 @@
                 = e
                 - if v.is_a?(Hash)
                   | .html
+              = link_to 'Edit', edit_key_path(path: "#{@keys.join('/')}/#{e}"), class: 'btn btn-xs btn-primary edit-key', remote: true
             - I18nO7r.languages.each do |l|
               td
                 - val = @store.lookup(l, (@keys + [e]).join('.'), show_missing: true)
