@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = I18nO7r::VERSION
   s.authors     = ["Peter Horn"]
   s.email       = ["peter.horn@provideal.net"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of I18nO7r."
-  s.description = "TODO: Description of I18nO7r."
+  s.homepage    = "https://github.com/metaminded/i18n_o7r"
+  s.summary     = "The Internationalization Organizer"
+  s.description = "I18nO7r is supposed to make life easier by organizing the i18n ymls in a very strict manner, allowing to edit the translations interactively and automatically detect missing locales as-you-use."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
