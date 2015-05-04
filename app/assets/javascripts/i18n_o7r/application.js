@@ -10,13 +10,29 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
+//= require jquery_ujs
 //= require ./jquery.autosize.min
 //= require ./easyTree
 
 jQuery(function($){
   $('.autosize').autosize();
+
+  $("a[data-remote]").on("ajax:success", function(e, data, status, xhr){
+    $(data).modal();
+  });
+
+  $(document).on('submit', '#update_key_form', function(e){
+    $('.update_key_buttons').hide();
+    $('.spinner').show();
+  });
+
+  $(document).on("ajax:success", "#update_key_form", function(e, data, status, xhr){
+    window.location.reload();
+  }).on("ajax:error", "#update_key_form", function(e, xhr, status, error){
+    $('.update_key_buttons').show();
+    $('.spinner').hide();
+  });
 });
 
 $(document).on('click', '.key', function(){$(this).siblings('.prefix').show()})
-
-

@@ -50,12 +50,11 @@ add an initializer (no generator so far):
     # only save missing translations in this envs
     config.save_missing_translations_in_envs = %{development}
 
-    # By default, we use the cdn versions of bootstrap and jquery to not have
+    # By default, we use the cdn version of bootstrap to not have
     # explicit gem dependencies and keep this gem lean. If you prefer to use
     # other libs, enter them here.
     config.bootstrap_css_url = '//some.cdn.com/...'
     config.bootstrap_js_url = '//some.cdn.com/...'
-    config.jquery_js_url = '//some.cdn.com/...'
   end
 </pre>
 

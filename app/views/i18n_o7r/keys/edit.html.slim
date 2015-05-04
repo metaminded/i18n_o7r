@@ -1,0 +1,18 @@
+.modal.fade
+  .modal-dialog
+      .modal-content
+        = form_tag(update_key_path(path: @path), method: :patch, id: 'update_key_form', remote: true)
+          .modal-header
+            button.close type='button' data-dismiss='modal' aria-label='Close'
+              span aria-hidden='true' &times;
+            h4.modal-title Edit key
+          .modal-body
+            .input-group
+              span.input-group-addon
+                = "#{@path.split('/')[0...-1].join('/')}/"
+              = text_field_tag 'new_key', nil, required: true, class: 'form-control', placeholder: @path.split('/').last
+          .modal-footer
+            .spinner
+            .update_key_buttons
+              button.btn.btn-link type='button' data-dismiss='modal' Close
+              = submit_tag 'Update', class: 'btn btn-primary', style: 'margin-top: 5px;'
