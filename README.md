@@ -25,9 +25,9 @@ add an initializer (no generator so far):
 <pre>
   I18nO7r.configure do |config|
     # where to find the ymls
-    config.locales_root = File.join(rails.root, 'config/locales/whatever')
+    config.locales_root = File.join(Rails.root, 'config/locales/whatever')
     # where to write the generated ymls
-    config.dump_location = File.join(rails.root, 'config/locales/whatever')
+    config.dump_location = File.join(Rails.root, 'config/locales/whatever')
     # where to write the detected missing trabslations
     config.missing_translations_filename = File.join(Rails.root, 'config/locales/missing_translations.yml')
 
