@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require ./jquery.autosize.min
 //= require ./easyTree
+//= require ./i18n_o7r
 
 jQuery(function($){
   $('.autosize').autosize();
@@ -33,6 +34,6 @@ jQuery(function($){
     $('.update_key_buttons').show();
     $('.spinner').hide();
   });
-});
 
-$(document).on('click', '.key', function(){$(this).siblings('.prefix').show()})
+  $(document).on('click', '.key', function(){$(this).siblings('.prefix').show()})
+});
