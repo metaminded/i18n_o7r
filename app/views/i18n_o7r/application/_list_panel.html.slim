@@ -1,10 +1,11 @@
 - @n = 0
-- content_for :buttons
-  - @subtrees.each do |s, tree|
-    li.margin: tt= link_to details_url.((@keys + [s]).join('/')), class: 'btn btn-default'
-      - c = tree._deep_count
-      - @n += c
-      = "#{s} (#{c})"
+- if @subtrees.present?
+  - content_for :buttons
+    - @subtrees.each do |s, tree|
+      li.margin: tt= link_to details_url.((@keys + [s]).join('/')), class: 'btn btn-default'
+        - c = tree._deep_count
+        - @n += c
+        = "#{s} (#{c})"
 = form_tag form_url, 'data-method' => :post
   .panel class=panel_type
     .panel-heading
