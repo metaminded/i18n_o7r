@@ -41,6 +41,13 @@ table.o7rtable {
   td:first-child {
     width: 20%;
   }
+
+  tr {
+    .buttons{ display:none; }
+    &:hover {
+      .buttons { display: block; }
+    }
+  }
 }
 
 textarea {
@@ -48,6 +55,7 @@ textarea {
     -webkit-transition: height 0.2s;
     -moz-transition: height 0.2s;
     transition: height 0.2s;
+    min-height: 30px;
   }
   &.html {
     font-family: monospace;

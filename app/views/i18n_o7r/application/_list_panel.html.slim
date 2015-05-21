@@ -31,15 +31,20 @@
             th= l
         - @entries.each do |e,v|
           tr
-            td: tt
-              span.prefix
-                = (@keys + ['']).join('.')
-              span.key
-                = e
-                - if v.is_a?(Hash)
-                  | .html
-              = link_to 'Edit', edit_key_path(path: "#{@keys.join('/')}/#{e}"), class: 'btn btn-xs btn-primary edit-key', remote: true
-              = link_to 'x', remove_key_path(key: "#{@keys.join('/')}/#{e}"), class: 'btn btn-xs btn-danger remove-key', data: {confirm: 'Are you sure?'}
+            td.label-cell
+              tt
+                span.prefix
+                  = (@keys + ['']).join('.')
+                span.key
+                  = e
+                  - if v.is_a?(Hash)
+                    | .html
+              .pull-right.buttons
+                .btn-group
+                  = link_to edit_key_path(path: "#{@keys.join('/')}/#{e}"), class: 'btn btn-xs btn-primary edit-key', remote: true
+                    i.glyphicon.glyphicon-pencil
+                  = link_to remove_key_path(key: "#{@keys.join('/')}/#{e}"), class: 'btn btn-xs btn-danger remove-key', data: {confirm: 'Are you sure?'}
+                    i.glyphicon.glyphicon-remove
             - I18nO7r.languages.each do |l|
               td
                 - val = @store.lookup(l, (@keys + [e]).join('.'), show_missing: true)
