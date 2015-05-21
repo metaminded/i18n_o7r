@@ -1,11 +1,13 @@
+- content_for :tree
+  = render 'tree', store: @store.translations[@lang.to_sym], keys: [], outer: true
+
 .panel.panel-warning
   .panel-heading
-    h3.panel-title Missing translations for #{@lang}
+    h3.panel-title #{@n} Missing translations for #{@lang}
   .panel-body
     .easy-tree
       ul
-        = render 'tree', store: @store.translations[@lang.to_sym], keys: []
-
+        = content_for :tree
 / javascript:
 /   jQuery(function ($) {
 /     $('.easy-tree').EasyTree({

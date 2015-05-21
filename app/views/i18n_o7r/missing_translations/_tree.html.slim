@@ -1,9 +1,14 @@
+- outer = outer
+- if outer
+  - @n = 0
 - store.each do |k, v|
   - newkeys = [keys, k].flatten
   - case v
   - when Hash
     - c = v._deep_count {|v| v == nil ? 1 : 0 }
     - if c > 0
+      - if outer
+        - @n += c
       li
         - kk = newkeys.join('/')
         => link_to i18n_o7r.translations_path(kk), class: 'btn btn-default btn-sm'

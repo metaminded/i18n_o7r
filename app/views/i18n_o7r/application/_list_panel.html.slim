@@ -1,3 +1,10 @@
+- @n = 0
+- content_for :buttons
+  - @subtrees.each do |s, tree|
+    li.margin: tt= link_to details_url.((@keys + [s]).join('/')), class: 'btn btn-default'
+      - c = tree._deep_count
+      - @n += c
+      = "#{s} (#{c})"
 = form_tag form_url, 'data-method' => :post
   .panel class=panel_type
     .panel-heading
@@ -6,6 +13,7 @@
       ul.horizontal.nomargin
         li= link_to details_url.(''), class: 'btn btn-default'
           i.glyphicon.glyphicon-home
+          = " #{@n}"
         - @keys.length.times do |i|
           li
             - c = (@keys.length == i+1 ? 'btn-primary' : 'btn-default')
@@ -13,10 +21,7 @@
     - if @subtrees.present?
       .panel-body
         ul.horizontal
-          - @subtrees.each do |s, tree|
-            li.margin: tt= link_to details_url.((@keys + [s]).join('/')), class: 'btn btn-default'
-              = "#{s} (#{tree._deep_count})"
-
+          = content_for :buttons
     - if @entries.present?
       table.table.table-striped.o7rtable
         tr
