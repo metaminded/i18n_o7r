@@ -24,7 +24,12 @@ body
         ul class="nav navbar-nav"
           li.active: a href=i18n_o7r.translations_path Translations
           li: a href=i18n_o7r.missing_translations_path(I18nO7r.primary_language) Missing Translations
-          li: a href="#contact" Contact
+        = form_tag i18n_o7r.search_path, method: :get, class: 'navbar-form navbar-left', role: 'search'
+            .input-group
+              = search_field_tag 'query', params[:query], class: 'form-control', minlength: '3'
+              .input-group-btn
+                button.btn.btn-default type="submit"
+                  span.glyphicon.glyphicon-search aria-hidden="true"
 
   .container style='margin-top: 70px;'
     = yield

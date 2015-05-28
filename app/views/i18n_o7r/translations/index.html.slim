@@ -2,4 +2,10 @@
   panel_type: 'panel-default',
   title: "Translations for",
   form_url: request.path,
-  details_url: ->(path) {i18n_o7r.translations_path(path)}
+  details_url: ->(path) {i18n_o7r.translations_path(path)},
+  entries: @entries,
+  subtrees: @subtrees,
+  keys: @keys,
+  store: @store,
+  locals: @entries.map{|k,v| {key: @keys, entry: k, value: v}},
+  show_home_button: true

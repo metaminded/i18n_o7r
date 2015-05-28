@@ -1,57 +1,59 @@
-- @n = 0
-- if @subtrees.present?
+- n = 0
+- if subtrees.present?
   - content_for :buttons
-    - @subtrees.each do |s, tree|
-      li.margin: tt= link_to details_url.((@keys + [s]).join('/')), class: 'btn btn-default'
+    - subtrees.each do |s, tree|
+      li.margin: tt= link_to details_url.((keys + [s]).join('/')), class: 'btn btn-default'
         - c = tree._deep_count
-        - @n += c
+        - n += c
         = "#{s} (#{c})"
 = form_tag form_url, 'data-method' => :post
   .panel class=panel_type
     .panel-heading
       h3.panel-title.i18no7rhead
         => title
-      ul.horizontal.nomargin
-        li= link_to details_url.(''), class: 'btn btn-default'
-          i.glyphicon.glyphicon-home
-          = " #{@n}"
-        - @keys.length.times do |i|
-          li
-            - c = (@keys.length == i+1 ? 'btn-primary' : 'btn-default')
-            tt= link_to @keys[i], details_url.(@keys[0..i].join('/')), class: "btn #{c}"
-    - if @subtrees.present?
+      - if show_home_button
+        ul.horizontal.nomargin
+          li= link_to details_url.(''), class: 'btn btn-default'
+            i.glyphicon.glyphicon-home
+            = " #{n}"
+          - keys.length.times do |i|
+            li
+              - c = (keys.length == i+1 ? 'btn-primary' : 'btn-default')
+              tt= link_to keys[i], details_url.(keys[0..i].join('/')), class: "btn #{c}"
+    - if subtrees.present?
       .panel-body
         ul.horizontal
           = content_for :buttons
-    - if @entries.present?
+    - if locals.present?
       table.table.table-striped.o7rtable
         tr
           th Key
           - I18nO7r.languages.each do |l|
             th= l
-        - @entries.each do |e,v|
+        - locals.each.with_index do |local, ix|
           tr
             td.label-cell
               tt
                 span.prefix
-                  = (@keys + ['']).join('.')
+                  = (local[:key] + ['']).join('.')
                 span.key
-                  = e
-                  - if v.is_a?(Hash)
+                  = local[:entry]
+                  - if local[:value].is_a?(Hash)
                     | .html
               .pull-right.buttons
                 .btn-group
-                  = link_to edit_key_path(path: "#{@keys.join('/')}/#{e}"), class: 'btn btn-xs btn-primary edit-key', remote: true
+                  = link_to edit_key_path(path: "#{local[:key].join('/')}/#{local[:entry]}"), class: 'btn btn-xs btn-primary edit-key', remote: true
                     i.glyphicon.glyphicon-pencil
-                  = link_to remove_key_path(key: "#{@keys.join('/')}/#{e}"), class: 'btn btn-xs btn-danger remove-key', data: {confirm: 'Are you sure?'}
+                  = link_to remove_key_path(key: "#{local[:key].join('/')}/#{local[:entry]}"), class: 'btn btn-xs btn-danger remove-key', data: {confirm: 'Are you sure?'}
                     i.glyphicon.glyphicon-remove
             - I18nO7r.languages.each do |l|
               td
-                - val = @store.lookup(l, (@keys + [e]).join('.'), show_missing: true)
+                - val = store.lookup(l, (local[:key] + [local[:entry]]).join('.'), show_missing: true)
+                = hidden_field_tag "translations[#{ix}][#{l}][key]", local[:key].join('.')
                 - if val.is_a?(Hash)
-                  = text_area_tag "translations[#{l}][#{e}][html]", val[:html], class: 'form-control autosize html'
+                  = text_area_tag "translations[#{ix}][#{l}][entry][#{local[:entry]}][html]", val[:html], class: 'form-control autosize html'
                 - else
-                  = text_area_tag "translations[#{l}][#{e}]", val, class: 'form-control autosize ' + (e.to_s.end_with?('html') ? 'html' : '')
+                  = text_area_tag "translations[#{ix}][#{l}][entry][#{local[:entry]}]", val, class: 'form-control autosize ' + (local[:entry].to_s.end_with?('html') ? 'html' : '')
       .panel-footer
         = submit_tag 'Speichern', class: 'btn btn-primary'
     - else

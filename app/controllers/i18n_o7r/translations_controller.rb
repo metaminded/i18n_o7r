@@ -17,10 +17,12 @@ module I18nO7r
 
     def update
       @store.unify!
-      params[:translations].each do |lang, tt|
-        lstore = @store.for(@keys, locale: lang)
-        tt.each do |k, v|
-          lstore[k.to_sym] = v.presence
+      params[:translations].each do |_, translation|
+        translation.each do |lang, locale|
+          lstore = @store.for(locale[:key].split('.'), locale: lang)
+          locale[:entry].each do |k, v|
+            lstore[k.to_sym] = v.presence
+          end
         end
       end
       @store.dump!
