@@ -48,7 +48,7 @@
                     i.glyphicon.glyphicon-remove
             - I18nO7r.languages.each do |l|
               td
-                - val = store.lookup(l, (local[:key] + [local[:entry]]).join('.'), show_missing: true)
+                - val = store.lookup(l, (local[:key] + [local[:entry]]).join('.'))
                 = hidden_field_tag "translations[#{ix}][#{l}][key]", local[:key].join('.')
                 - if val.is_a?(Hash)
                   = text_area_tag "translations[#{ix}][#{l}][entry][#{local[:entry]}][html]", val[:html], class: 'form-control autosize html'

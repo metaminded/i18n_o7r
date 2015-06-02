@@ -19,11 +19,17 @@ body
           span class="icon-bar"
           span class="icon-bar"
           span class="icon-bar"
-        a class="navbar-brand" href="#" Project name
+        a class="navbar-brand" href="#" I18n O7r
       div id="navbar" class="collapse navbar-collapse"
         ul class="nav navbar-nav"
           li.active: a href=i18n_o7r.translations_path Translations
-          li: a href=i18n_o7r.missing_translations_path(I18nO7r.primary_language) Missing Translations
+          li.dropdown
+            a.dropdown-toggle data-toggle="dropdown" href="#"
+              | Missing Translations
+              b.caret
+            ul.dropdown-menu
+              - I18nO7r.languages.each do |loc|
+                li: a href=i18n_o7r.missing_translations_path(loc) = loc
         = form_tag i18n_o7r.search_path, method: :get, class: 'navbar-form navbar-left', role: 'search'
             .input-group
               = search_field_tag 'query', params[:query], class: 'form-control', minlength: '3'

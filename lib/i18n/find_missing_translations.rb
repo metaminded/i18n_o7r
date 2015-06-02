@@ -4,10 +4,12 @@ if I18nO7r.save_missing_translations_in_envs.member?(Rails.env.to_s)
 
     def lookup(locale, key, scope = [], options = {})
       show_missing = options.delete(:show_missing)
+      replace_all = !options.delete(:ignore_replace) && I18nO7r.replace_all_with.presence
       t = super(locale, key, scope, options)
       if t
         # we found a proper match
-        return t
+        return t unless replace_all
+        return replace_existing(t, replace_all)
       elsif !I18nO7r.missing_translations_filename || !I18nO7r.save_missing_translations_in_envs.member?(Rails.env.to_s)
         # we're not set up to do any special magic
         return nil
@@ -29,6 +31,18 @@ if I18nO7r.save_missing_translations_in_envs.member?(Rails.env.to_s)
       end # store transaction
       nil
     end # lookup
+
+    private
+
+    def replace_existing(obj, with)
+      case obj
+      when String then with
+      when Array then  obj.map{|x| replace_existing(x, with)}
+      when Hash then   Hash[obj.map{|k,v| [k, replace_existing(v, with)]}]
+      else obj
+      end
+    end
+
   end # FindMissingTranslations
 
   I18n::Backend::Simple.send :prepend, I18nO7r::FindMissingTranslations
