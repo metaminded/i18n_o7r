@@ -25,12 +25,16 @@ module I18nO7r
 
       def dumper(hash, kpath, fpath)
         h = {}
-        hash.each do |key, val|
-          if val.is_a?(Hash) && val.keys != [:html]
-            FileUtils.mkdir_p fpath
-            dumper(val, kpath.dup << key.to_s, File.join(fpath, key.to_s.gsub('/', '-')))
-          else
-            h[key.to_s] = val
+        if I18nO7r.flatten_after && kpath.length >= I18nO7r.flatten_after
+          h = hash
+        else
+          hash.each do |key, val|
+            if val.is_a?(Hash) && val.keys != [:html]
+              FileUtils.mkdir_p fpath
+              dumper(val, kpath.dup << key.to_s, File.join(fpath, key.to_s.gsub('/', '-')))
+            else
+              h[key.to_s] = val
+            end
           end
         end
         if h.present?

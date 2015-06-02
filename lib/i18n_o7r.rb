@@ -16,6 +16,7 @@ module I18nO7r
   mattr_accessor :save_missing_translations_in_envs
   mattr_accessor :missing_translations_filename
   mattr_accessor :ignore_missing_pattern
+  mattr_accessor :flatten_after
 
   @@languages                 = I18n.available_locales
   @@primary_language          = I18n.locale
