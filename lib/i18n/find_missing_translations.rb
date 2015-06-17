@@ -1,5 +1,4 @@
 if I18nO7r.save_missing_translations_in_envs.member?(Rails.env.to_s)
-
   module I18nO7r::FindMissingTranslations
 
     def lookup(locale, key, scope = [], options = {})
