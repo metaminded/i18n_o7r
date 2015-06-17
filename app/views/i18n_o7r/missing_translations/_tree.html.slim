@@ -10,8 +10,7 @@
       - if outer
         - @n += c
       li
-        - kk = newkeys.join('/')
-        => link_to i18n_o7r.translations_path(kk), class: 'btn btn-default btn-sm'
+        => link_to i18n_o7r_translations_path(newkeys), class: 'btn btn-default btn-sm'
           tt
             - kk = newkeys.join('.')
             = "#{kk} (#{c})"
