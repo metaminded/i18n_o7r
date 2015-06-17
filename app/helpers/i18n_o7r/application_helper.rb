@@ -12,6 +12,12 @@ module I18nO7r
         </script>
       HTML
     end
+
+    def i18n_o7r_translations_path(path_components=[])
+      pc = [path_components].flatten
+      p = pc.map{|c| c.to_s.gsub('/', '--')}.join('/')
+      i18n_o7r.translations_path(p)
+    end
   end
 end
 

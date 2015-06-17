@@ -2,7 +2,7 @@ module I18nO7r
   class TranslationsController < I18nO7r::ApplicationController
 
     before_filter do
-      @keys = params[:path].try(:split, '/') || []
+      @keys = (params[:path].try(:split, '/') || []).map{|s|s.gsub('--','/')}
       @store = Store.new()
     end
 

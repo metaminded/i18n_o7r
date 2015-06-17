@@ -2,7 +2,7 @@
 - if subtrees.present?
   - content_for :buttons
     - subtrees.each do |s, tree|
-      li.margin: tt= link_to details_url.((keys + [s]).join('/')), class: 'btn btn-default'
+      li.margin: tt= link_to details_url.(keys + [s]), class: 'btn btn-default'
         - c = tree._deep_count
         - n += c
         = "#{s} (#{c})"
@@ -19,7 +19,7 @@
           - keys.length.times do |i|
             li
               - c = (keys.length == i+1 ? 'btn-primary' : 'btn-default')
-              tt= link_to keys[i], details_url.(keys[0..i].join('/')), class: "btn #{c}"
+              tt= link_to keys[i], details_url.(keys[0..i]), class: "btn #{c}"
     - if subtrees.present?
       .panel-body
         ul.horizontal
