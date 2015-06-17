@@ -1,4 +1,6 @@
 I18nO7r::Engine.routes.draw do
+  root to: 'translations#index'
+
   get  "translations/(*path)"  => 'translations#index', as: 'translations'
   post "translations/(*path)"  => 'translations#update'
   get "keys/(*path)/edit" => 'keys#edit', as: 'edit_key'
