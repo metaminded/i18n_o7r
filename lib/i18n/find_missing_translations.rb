@@ -4,7 +4,7 @@ if I18nO7r.save_missing_translations_in_envs.member?(Rails.env.to_s)
     def lookup(locale, key, scope = [], options = {})
       show_missing = options.delete(:show_missing)
       replace_all = !options.delete(:ignore_replace) && I18nO7r.replace_all_with.presence
-      t = super(locale, key, scope, options)
+      t = super(locale, key, scope, options) || super(locale, "#{key}~~", scope, options)
       if t
         # we found a proper match
         return t unless replace_all
@@ -45,4 +45,13 @@ if I18nO7r.save_missing_translations_in_envs.member?(Rails.env.to_s)
   end # FindMissingTranslations
 
   I18n::Backend::Simple.send :prepend, I18nO7r::FindMissingTranslations
+else
+
+  module I18nO7r::FindMissingTranslationsLight
+    def lookup(locale, key, scope = [], options = {})
+      super(locale, key, scope, options) || super(locale, "#{key}~~", scope, options)
+    end
+  end
+
+  I18n::Backend::Simple.send :prepend, I18nO7r::FindMissingTranslationsLight
 end

@@ -19,8 +19,20 @@
 jQuery(function($){
   $('.autosize').autosize();
 
-  $("a[data-remote]").on("ajax:success", function(e, data, status, xhr){
+  $("a.edit-key[data-remote]").on("ajax:success", function(e, data, status, xhr){
     $(data).modal();
+  });
+
+  $('a.mark-key, a.unmark-key').on("ajax:success", function(e, data, status, xhr){
+    window.location.reload();
+  }).on('ajax:error', function(x, xhr, status, error){
+    $('.modification-buttons').removeClass('hide');
+    $(this).parents($('.modification-buttons')).siblings('.spinner').hide();
+  });
+
+  $('a.mark-key, a.unmark-key').on('click', function(){
+    $('.modification-buttons').addClass('hide');
+    $(this).parents($('.modification-buttons')).siblings('.spinner').show();
   });
 
   $(document).on('submit', '#update_key_form', function(e){

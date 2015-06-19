@@ -22,7 +22,7 @@ body
         a class="navbar-brand" href="#" I18n O7r
       div id="navbar" class="collapse navbar-collapse"
         ul class="nav navbar-nav"
-          li.active: a href=i18n_o7r.translations_path Translations
+          li: a href=i18n_o7r.translations_path Translations
           li.dropdown
             a.dropdown-toggle data-toggle="dropdown" href="#"
               | Missing Translations
@@ -30,6 +30,8 @@ body
             ul.dropdown-menu
               - I18nO7r.languages.each do |loc|
                 li: a href=i18n_o7r.missing_translations_path(loc) = loc
+          li
+            a href=i18n_o7r.markers_path Marker
         = form_tag i18n_o7r.search_path, method: :get, class: 'navbar-form navbar-left', role: 'search'
             .input-group
               = search_field_tag 'query', params[:query], class: 'form-control', minlength: '3'

@@ -9,8 +9,8 @@
           .modal-body
             .input-group
               span.input-group-addon
-                = "#{@path.split('/')[0...-1].join('/')}/"
-              = text_field_tag 'new_key', nil, required: true, class: 'form-control', placeholder: @path.split('/').last
+                = "#{@path.split('/')[0...-1].join('.').gsub('--', '/')}."
+              = text_field_tag 'new_key', nil, required: true, class: 'form-control', placeholder: @path.split('/').last.gsub(/~~\z/, '')
           .modal-footer
             .spinner
             .update_key_buttons

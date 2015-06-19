@@ -8,4 +8,7 @@ I18nO7r::Engine.routes.draw do
   get "keys/(*key)" => 'keys#destroy', as: 'remove_key'
   get  "missing_translations/:lang/(*path)" => 'missing_translations#index', as: 'missing_translations'
   get "search" => 'search#index', as: 'search'
+  get "markers" => 'markers#index', as: 'markers'
+  post "mark/(*key)" => 'markers#create', as: 'mark'
+  delete "unmark/(*key)" => 'markers#destroy', as: 'unmark'
 end

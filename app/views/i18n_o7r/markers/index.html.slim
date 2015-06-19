@@ -1,0 +1,11 @@
+- @keys ||= []
+= render 'list_panel',
+    panel_type: 'panel-default',
+    title: "Markers",
+    form_url: i18n_o7r.translations_path,
+    details_url: ->(path) {i18n_o7r_translations_path(path)},
+    locals: @locals,
+    subtrees: nil,
+    keys: [],
+    store: @store,
+    show_home_button: false
