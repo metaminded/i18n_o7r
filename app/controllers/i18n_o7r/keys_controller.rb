@@ -1,6 +1,8 @@
 module I18nO7r
   class KeysController < I18nO7r::ApplicationController
 
+    before_action :gsub_path, only: [:update, :destroy]
+
     def edit
       @path = params[:path]
       render action: 'edit', layout: false
@@ -8,12 +10,15 @@ module I18nO7r
 
     def update
       @store = Store.new
-      @keys = params[:path].try(:split, '/') || []
       new_key = params[:new_key]
       if new_key.present?
         I18n.available_locales.each do |l|
+          append = ''
+          if @keys.last =~ /~~\z/i
+            append = '~~'
+          end
           val = @store.for(@keys[0...-1], locale: l).delete @keys.last.to_sym
-          @store.for(@keys[0...-1], locale: l)[params[:new_key].to_sym] = val
+          @store.for(@keys[0...-1], locale: l)["#{params[:new_key]}#{append}".to_sym] = val
         end
         @store.dump!
         I18n.reload!
@@ -25,13 +30,19 @@ module I18nO7r
 
     def destroy
       @store = Store.new
-      @keys = params[:key].try(:split, '/') || []
       I18n.available_locales.each do |l|
         @store.for(@keys[0...-1], locale: l).delete @keys.last.to_sym
       end
       @store.dump!
       I18n.reload!
-      redirect_to i18n_o7r.translations_path(@keys[0...-1].join('/'))
+      redirect_to i18n_o7r.translations_path(params[:path].split('/')[0...-1].join('/'))
+    end
+
+
+    private
+
+    def gsub_path
+      @keys = (params[:path].try(:split, '/') || []).map{|s|s.gsub('--','/')}
     end
   end
 end
