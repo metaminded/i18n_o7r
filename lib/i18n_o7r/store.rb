@@ -24,7 +24,7 @@ class I18nO7r::Store
   end
 
   def for(keys, locale: nil)
-    vv = keys.inject(translations[locale.try(:to_sym) || I18nO7r.primary_language]) do |a,e| a[e.to_sym] end
+    vv = keys.inject(translations[locale.try(:to_sym) || I18nO7r.primary_language]) do |a,e| (a ? a[e.to_sym] : nil) end
   end
 
   def reload!
