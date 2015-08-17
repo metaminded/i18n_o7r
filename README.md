@@ -48,7 +48,7 @@ add an initializer (no generator so far):
       key_is_ugly? key
     end
     # only save missing translations in this envs
-    config.save_missing_translations_in_envs = %{development}
+    config.save_missing_translations_in_envs = %w{development}
 
     # By default, we use the cdn version of bootstrap to not have
     # explicit gem dependencies and keep this gem lean. If you prefer to use
