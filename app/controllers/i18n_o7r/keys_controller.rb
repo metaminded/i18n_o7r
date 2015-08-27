@@ -12,7 +12,7 @@ module I18nO7r
       @store = Store.new
       new_key = params[:new_key]
       if new_key.present?
-        I18n.available_locales.each do |l|
+        I18nO7r::languages.each do |l|
           append = ''
           if @keys.last =~ /~~\z/i
             append = '~~'
@@ -30,7 +30,7 @@ module I18nO7r
 
     def destroy
       @store = Store.new
-      I18n.available_locales.each do |l|
+      I18nO7r::languages.each do |l|
         @store.for(@keys[0...-1], locale: l).delete @keys.last.to_sym
       end
       @store.dump!
