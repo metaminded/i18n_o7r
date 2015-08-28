@@ -10,9 +10,11 @@ module I18nO7r
       vv = @store.unify!.for(@keys)
       if vv.present?
         vv = vv.group_by{|k,v| v.is_a?(Hash) && v.present? && (v.keys - [:html]).present? }
-        @subtrees = vv[true] || []
-        @entries = vv[false] || []
+        @subtrees = vv[true]
+        @entries = vv[false]
       end
+      @subtrees ||= []
+      @entries  ||= []
     end
 
     def update
