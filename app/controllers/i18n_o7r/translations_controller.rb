@@ -7,12 +7,15 @@ module I18nO7r
     end
 
     def index
-      vv = @store.unify!.for(@keys)
+      vv = {}
+      i18n_o7r_locales.each { |l| vv = vv.merge(@store.unify!.for(@keys, locale: l)) }
       if vv.present?
         vv = vv.group_by{|k,v| v.is_a?(Hash) && v.present? && (v.keys - [:html]).present? }
-        @subtrees = vv[true] || []
-        @entries = vv[false] || []
+        @subtrees = vv[true]
+        @entries = vv[false]
       end
+      @subtrees ||= []
+      @entries  ||= []
     end
 
     def update

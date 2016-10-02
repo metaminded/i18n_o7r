@@ -18,6 +18,7 @@ module I18nO7r
   mattr_accessor :ignore_missing_pattern
   mattr_accessor :flatten_after
   mattr_accessor :replace_all_with
+  mattr_accessor :excluded_subtrees
 
   @@languages                 = I18n.available_locales
   @@primary_language          = I18n.locale

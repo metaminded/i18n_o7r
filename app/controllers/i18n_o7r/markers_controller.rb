@@ -5,7 +5,7 @@ module I18nO7r
 
     def create
       @store = Store.new
-      I18n.available_locales.each do |l|
+      I18nO7r.languages.each do |l|
         @store.for(@keys[0...-1], locale: l)["#{@keys.last}~~".to_sym] = @store.for(@keys[0...-1], locale: l)[@keys.last.to_sym]
         @store.for(@keys[0...-1], locale: l).delete @keys.last.to_sym
       end
@@ -24,7 +24,7 @@ module I18nO7r
 
     def destroy
       @store = Store.new
-      I18n.available_locales.each do |l|
+      i18n_o7r_locales.each do |l|
         @store.for(@keys[0...-1], locale: l)["#{@keys.last}".gsub(/~~\z/, '').to_sym] = @store.for(@keys[0...-1], locale: l)[@keys.last.to_sym]
         @store.for(@keys[0...-1], locale: l).delete @keys.last.to_sym
       end

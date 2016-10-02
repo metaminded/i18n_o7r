@@ -2,6 +2,7 @@
 - if outer
   - @n = 0
 - store.each do |k, v|
+  - next if I18nO7r.excluded_subtrees.present? && I18nO7r.excluded_subtrees.any? { |t| k.to_s.start_with?(t) }
   - newkeys = [keys, k].flatten
   - case v
   - when Hash
