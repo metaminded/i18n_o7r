@@ -7,7 +7,7 @@ module I18nO7r
       @store = Store.new
       @path = []
       @locals = []
-      I18n.available_locales.each do |locale|
+      i18n_o7r_locales.each do |locale|
         vv = @store.for([], locale: locale)
         traverse_hash(vv)
       end

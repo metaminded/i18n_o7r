@@ -16,6 +16,7 @@ module I18nO7r
       private
 
       def unifyer(primary_store, other_store)
+        other_store ||= {}
         primary_store.each do |key, val|
           case val
           when Hash

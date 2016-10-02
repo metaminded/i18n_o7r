@@ -13,5 +13,8 @@ module I18nO7r
       end
     end
 
+    def i18n_o7r_locales
+      I18nO7r.languages.presence || I18n.available_locales
+    end
   end
 end
