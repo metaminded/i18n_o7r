@@ -55,6 +55,10 @@ add an initializer (no generator so far):
     # other libs, enter them here.
     config.bootstrap_css_url = '//some.cdn.com/...'
     config.bootstrap_js_url = '//some.cdn.com/...'
+
+    # Exclude subtrees from being displayed in missing translations
+    # Uncomment next line to activate
+    # config.excluded_subtrees = %w{date.formats activerecord.errors.template}
   end
 </pre>
 
