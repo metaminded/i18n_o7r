@@ -4,6 +4,7 @@ if I18nO7r.save_missing_translations_in_envs.member?(Rails.env.to_s)
     def lookup(locale, key, scope = [], options = {})
       show_missing = options.delete(:show_missing)
       replace_all = !options.delete(:ignore_replace) && I18nO7r.replace_all_with.presence
+      I18nO7r.requested_keys << [scope, key].join('.') unless options.delete(:dont_collect_requested_keys)
       t = super(locale, key, scope, options) || super(locale, "#{key}~~", scope, options)
       if t
         # we found a proper match

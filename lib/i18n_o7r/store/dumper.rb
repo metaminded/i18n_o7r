@@ -10,12 +10,17 @@ module I18nO7r
           files.each do |file|
             FileUtils.move file, savepath
           end
+        else
+          files = Dir[File.join(target, '*')]
+          files.each do |file|
+            FileUtils.rm_r file
+          end
         end
         dumper(translations, [], target)
       end
 
       def dump!
-        dump(I18nO7r.locales_root, cleanup: true)
+        dump(I18nO7r.locales_root, cleanup: I18nO7r.keep_backup)
         reload!
         reload_i18n!
         self

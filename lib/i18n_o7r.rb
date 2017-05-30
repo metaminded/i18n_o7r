@@ -18,6 +18,7 @@ module I18nO7r
   mattr_accessor :ignore_missing_pattern
   mattr_accessor :flatten_after
   mattr_accessor :replace_all_with
+  mattr_accessor :keep_backup
 
   @@languages                 = I18n.available_locales
   @@primary_language          = I18n.locale
@@ -25,6 +26,7 @@ module I18nO7r
   @@bootstrap_css_url         = BOOTSTRAP_CSS_CDN_URL
   @@save_missing_translations_in_envs = %w{development}
   @@missing_translations_filename = nil
+  @@keep_backup               = false
 
   def self.configure
     yield(self)
@@ -36,6 +38,10 @@ module I18nO7r
 
   def self.ignore_missing_if(&block)
     @@ignore_missing_pattern = block
+  end
+
+  def self.requested_keys
+    RequestStore.store[:_i18n_o7r_requested_keys] ||= Set.new
   end
 end
 

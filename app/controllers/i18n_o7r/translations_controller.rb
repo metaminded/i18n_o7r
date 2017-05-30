@@ -20,14 +20,18 @@ module I18nO7r
       params[:translations].each do |_, translation|
         translation.each do |lang, locale|
           lstore = @store.for(locale[:key].split('.'), locale: lang)
-          locale[:entry].each do |k, v|
-            lstore[k.to_sym] = v.presence
+          if !lstore
+            puts "Ignoring: #{locale[:key]}"
+          else
+            locale[:entry].each do |k, v|
+              lstore[k.to_sym] = v.presence
+            end
           end
         end
       end
       @store.dump!
       I18n.reload!
-      redirect_to i18n_o7r.translations_path(params[:path])
+      redirect_to params[:return_path] || i18n_o7r.translations_path(params[:path])
     end
   end
 end
