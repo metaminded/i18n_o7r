@@ -5,7 +5,13 @@ if I18nO7r.save_missing_translations_in_envs.member?(Rails.env.to_s)
       show_missing = options.delete(:show_missing)
       replace_all = !options.delete(:ignore_replace) && I18nO7r.replace_all_with.presence
       defaults = options.delete(:defaults) || {}
-      I18nO7r.requested_keys << [scope, key].join('.') unless options.delete(:dont_collect_requested_keys)
+      ipat = I18nO7r.ignore_missing_pattern
+      kk = [locale, scope, key].join('.')
+      ignored = case ipat
+      when Regexp then ipat.match(kk)
+      when Proc then ipat.(kk)
+      end
+      I18nO7r.requested_keys << [scope, key].join('.') unless ignored || options.delete(:dont_collect_requested_keys)
       t = super(locale, key, scope, options) || super(locale, "#{key}~~", scope, options)
       if t
         # we found a proper match
@@ -16,12 +22,7 @@ if I18nO7r.save_missing_translations_in_envs.member?(Rails.env.to_s)
         return defaults[locale]
       end
       # The key wasn't found and we're prepared to write it away
-      ipat = I18nO7r.ignore_missing_pattern
-      kk = [locale, scope, key].join('.')
-      case ipat
-      when Regexp then return nil if ipat.match(kk)
-      when Proc then return nil if ipat.(kk)
-      end
+      return nil if ignored
       mt_store = YAML::Store.new(I18nO7r.missing_translations_filename)
       keys = I18n.normalize_keys(locale, key, scope, options[:separator])
       mt_store.transaction do
