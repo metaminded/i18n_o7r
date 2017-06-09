@@ -7,7 +7,7 @@ module I18nO7r
       http_basic_authenticate_with name: I18nO7r.username, password: I18nO7r.password
     end
 
-    before_filter do
+    before_action do
       if (!I18nO7r.username || !I18nO7r.password) && Rails.env.production?
         raise "secure I18nO7r with username and password for use in production"
       end
