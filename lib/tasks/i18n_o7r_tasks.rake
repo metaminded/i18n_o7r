@@ -12,8 +12,12 @@ namespace :i18n_o7r do
     store.dump(target)
   end
 
-  desc('clear missing translations')
   task clear_missing_translations: :environment do |t, args|
+    raise "That name was stupid, use `rake i18n_o7r:cleanup` instead."
+  end
+
+  desc('merge missing translations into default tree')
+  task cleanup: :environment do |t, args|
     mt_store = YAML::Store.new(I18nO7r.missing_translations_filename)
     mt_store.transaction do
       mt_store.roots.each do |root|
