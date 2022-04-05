@@ -14,6 +14,10 @@ Gem::Specification.new do |s|
   s.description = "I18nO7r is supposed to make life easier by organizing the i18n ymls in a very strict manner, allowing to edit the translations interactively and automatically detect missing locales as-you-use."
   s.license     = "MIT"
 
+  s.add_dependency "sprockets-rails"
+  s.add_dependency "sass-rails"
+  s.add_dependency "slim-rails"
+
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 end
