@@ -54,7 +54,11 @@ add an initializer (no generator so far):
     # explicit gem dependencies and keep this gem lean. If you prefer to use
     # other libs, enter them here.
     config.bootstrap_css_url = '//some.cdn.com/...'
+    config.bootstrap_css_integrity = '...'
     config.bootstrap_js_url = '//some.cdn.com/...'
+    config.bootstrap_js_integrity = '...'
+    config.jquery_url = '//some.cdn.com/...'
+    config.jquery_integrity = '...'
   end
 </pre>
 
