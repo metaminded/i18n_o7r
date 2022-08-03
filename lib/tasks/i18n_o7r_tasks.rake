@@ -26,6 +26,8 @@ namespace :i18n_o7r do
         mt_store.delete(root) if updated_hash.empty?
       end
     end # store transaction
+    # empty translation files are not accepted by I18n
+    File.delete(I18nO7r.missing_translations_filename) if File.empty?(I18nO7r.missing_translations_filename)
     @store = I18nO7r::Store.new
     @store.unify!
     @store.dump!
