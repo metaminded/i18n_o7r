@@ -23,9 +23,10 @@ if I18nO7r.save_missing_translations_in_envs.member?(Rails.env.to_s)
       end
       # The key wasn't found and we're prepared to write it away
       return nil if ignored
-      if I18nO7r.missing_translations_filename
+      # only begin transaction if we have keys to write,
+      # otherwise we would create an empty file that is not accepted by I18n
+      if I18nO7r.missing_translations_filename && (keys = I18n.normalize_keys(locale, key, scope, options[:separator])).any?
         mt_store = YAML::Store.new(I18nO7r.missing_translations_filename)
-        keys = I18n.normalize_keys(locale, key, scope, options[:separator])
         mt_store.transaction do
           keys.each.with_index.inject(mt_store) do |a, (e, i)|
             # puts ">> #{a} -> #{e}, #{i}"
