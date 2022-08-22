@@ -1,7 +1,14 @@
 require 'yaml/store'
 
-BOOTSTRAP_CSS_CDN_URL = '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'
-BOOTSTRAP_JS_CDN_URL  = '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'
+# https://getbootstrap.com/docs/3.4/getting-started/#download-cdn
+BOOTSTRAP_CSS_CDN_URL       = "https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+BOOTSTRAP_CSS_CDN_INTEGRITY = "sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+BOOTSTRAP_JS_CDN_URL        = "https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"
+BOOTSTRAP_JS_CDN_INTEGRITY  = "sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+
+# https://releases.jquery.com/
+JQUERY_CDN_URL              = "https://code.jquery.com/jquery-3.6.0.slim.min.js"
+JQUERY_CDN_INTEGRITY        = "sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
 
 module I18nO7r
   mattr_accessor :dump_location
@@ -12,7 +19,11 @@ module I18nO7r
   mattr_accessor :languages
   mattr_accessor :configured
   mattr_accessor :bootstrap_css_url
+  mattr_accessor :bootstrap_css_integrity
   mattr_accessor :bootstrap_js_url
+  mattr_accessor :bootstrap_js_integrity
+  mattr_accessor :jquery_url
+  mattr_accessor :jquery_integrity
   mattr_accessor :save_missing_translations_in_envs
   mattr_accessor :missing_translations_filename
   mattr_accessor :ignore_missing_pattern
@@ -23,7 +34,11 @@ module I18nO7r
   @@languages                 = I18n.available_locales
   @@primary_language          = I18n.locale
   @@bootstrap_js_url          = BOOTSTRAP_JS_CDN_URL
+  @@bootstrap_js_integrity    = BOOTSTRAP_JS_CDN_INTEGRITY
   @@bootstrap_css_url         = BOOTSTRAP_CSS_CDN_URL
+  @@bootstrap_css_integrity   = BOOTSTRAP_CSS_CDN_INTEGRITY
+  @@jquery_url                = JQUERY_CDN_URL
+  @@jquery_integrity          = JQUERY_CDN_INTEGRITY
   @@save_missing_translations_in_envs = %w{development}
   @@missing_translations_filename = nil
   @@keep_backup               = false

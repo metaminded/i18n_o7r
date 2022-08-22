@@ -5,10 +5,11 @@ html
     meta http-equiv="X-UA-Compatible" content="IE=edge"
     meta name="viewport" content="width=device-width, initial-scale=1"
     title I18nO7r – Internationalization Organizer
-    = stylesheet_link_tag I18nO7r.bootstrap_css_url, media: "all"
+    = stylesheet_link_tag I18nO7r.bootstrap_css_url, integrity: I18nO7r.bootstrap_css_integrity, crossorigin: "anonymous", media: "all"
     = stylesheet_link_tag 'i18n_o7r/application', media: "all"
+    = javascript_include_tag I18nO7r.jquery_url, integrity: I18nO7r.jquery_integrity, crossorigin: "anonymous"
     = javascript_include_tag 'i18n_o7r/application'
-    = javascript_include_tag I18nO7r.bootstrap_js_url
+    = javascript_include_tag I18nO7r.bootstrap_js_url, integrity: I18nO7r.bootstrap_js_integrity, crossorigin: "anonymous"
     = csrf_meta_tags
 body
   nav class="navbar navbar-inverse navbar-fixed-top"
