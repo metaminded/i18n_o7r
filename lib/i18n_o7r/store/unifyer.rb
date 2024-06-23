@@ -19,7 +19,13 @@ module I18nO7r
         primary_store.each do |key, val|
           case val
           when Hash
-            other_store[key] = {} unless other_store[key].is_a?(Hash)
+            if other_store[key].is_a?(Hash) && other_store[key].frozen?
+              other_store[key] = other_store[key].dup
+            elsif other_store[key].is_a?(Hash)
+              # fine
+            else
+              other_store[key] = {}
+            end
             unifyer(val, other_store[key])
           when Array
             other_store[key] ||= val.map {|v| nil }
